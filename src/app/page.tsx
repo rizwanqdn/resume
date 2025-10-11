@@ -1,7 +1,9 @@
 // app/page.tsx
 'use client'
+// Import the Navbar component here
+import Navbar from '../../components/Navbar'; 
 import { Mail, Phone, MapPin, GraduationCap, Briefcase, Zap, Star, Code, Terminal, Trophy, User } from 'lucide-react'; 
-import Link from 'next/link';
+
 
 // --- Data Structure (Unchanged) ---
 const personalData = {
@@ -43,9 +45,10 @@ const languages = [
 
 // --- Utility Components ---
 
+// Accent color changed to Cyan-400
 const ContactItem: React.FC<{ icon: React.ElementType, detail: string, href: string }> = ({ icon: Icon, detail, href }) => (
-    <a href={href} target="_blank" rel="noopener noreferrer" className="flex items-center text-sm text-gray-300 hover:text-teal-400 transition-colors group">
-        <Icon className="w-4 h-4 mr-2 text-teal-400 group-hover:text-teal-300 flex-shrink-0" />
+    <a href={href} target="_blank" rel="noopener noreferrer" className="flex items-center text-sm text-gray-300 hover:text-cyan-300 transition-colors group">
+        <Icon className="w-4 h-4 mr-2 text-cyan-400 group-hover:text-cyan-300 flex-shrink-0" />
         <span className="truncate">{detail}</span>
     </a>
 );
@@ -53,7 +56,7 @@ const ContactItem: React.FC<{ icon: React.ElementType, detail: string, href: str
 const StarRating: React.FC<{ count: number }> = ({ count }) => (
     <div className="flex space-x-0.5">
         {[...Array(5)].map((_, i) => (
-            <Star key={i} className={`w-4 h-4 ${i < count ? 'text-amber-400 fill-amber-400' : 'text-gray-700'}`} />
+            <Star key={i} className={`w-4 h-4 ${i < count ? 'text-cyan-400 fill-cyan-400' : 'text-gray-600/50'}`} />
         ))}
     </div>
 );
@@ -62,32 +65,37 @@ const StarRating: React.FC<{ count: number }> = ({ count }) => (
 // --- Main Page Component ---
 export default function HomePage() {
   return (
-    // Academic-themed background: Light blue-gray for professional contrast
-    <div className="min-h-screen bg-gray-50 text-gray-800 font-sans antialiased"> {/* Added bg-gray-50 for a subtle background */}
-      <div className="max-w-6xl mx-auto shadow-2xl rounded-xl overflow-hidden my-8 lg:my-16 bg-white"> {/* Added bg-white to the main card */}
+    // Background: Used Blue-Gray 900 for a deep, modern slate background
+    <div className="min-h-screen bg-gray-100 text-gray-800 font-sans antialiased">
+      
+      {/* 1. Navbar is placed outside the main card */}
+      <Navbar />
+
+      <div className="max-w-6xl mx-auto shadow-2xl rounded-xl overflow-hidden my-8 lg:my-16 bg-white border border-gray-200">
         
         {/* CV Grid Layout: Sidebar (30%) and Main Content (70%) */}
         <div className="grid grid-cols-1 lg:grid-cols-3">
           
           {/* ==================================================== */}
-          {/* 1. SIDEBAR (Contact, Skills, Languages, Projects) */}
+          {/* 1. SIDEBAR (Slate Blue Background) */}
           {/* ==================================================== */}
-          <aside className="lg:col-span-1 bg-gray-900 text-gray-100 p-8 space-y-10 border-r border-gray-800 animate-slide-in-left">
+          {/* bg-slate-900 or bg-blue-gray-900 (using Tailwind's blue-gray equivalent, or just a dark blue-gray) */}
+          <aside className="lg:col-span-1 bg-slate-900 text-gray-100 p-8 space-y-10 border-r border-slate-700/50 animate-slide-in-left">
             
             {/* --- PERSONAL INFO / AVATAR --- */}
             <header className="text-center">
-              {/* Avatar Placeholder */}
-              <div className="w-24 h-24 mx-auto rounded-full bg-teal-600 border-4 border-teal-400 mb-4 flex items-center justify-center text-4xl font-bold shadow-lg">
-                  <User className="w-12 h-12 text-white" /> {/* Using User icon for a cleaner look */}
+              {/* Accent color changed to Cyan-500 */}
+              <div className="w-28 h-28 mx-auto rounded-full bg-cyan-500 border-4 border-cyan-300 mb-4 flex items-center justify-center text-4xl font-bold shadow-2xl">
+                  <User className="w-14 h-14 text-slate-900" /> {/* Changed icon color for contrast */}
               </div>
-              <h1 className="text-3xl font-extrabold tracking-tight text-white">{personalData.name.toUpperCase()}</h1>
-              <p className="text-sm font-light text-teal-400 mt-1">{personalData.title}</p>
+              <h1 className="text-4xl font-extrabold tracking-tight text-white">{personalData.name.toUpperCase()}</h1>
+              <p className="text-base font-light text-cyan-300 mt-1">{personalData.title}</p>
             </header>
 
             {/* --- CONTACT --- */}
-            <section>
-                <h2 className="sidebar-heading">
-                    <Mail className="sidebar-icon" /> Contact
+            <section className="pt-2">
+                <h2 className="sidebar-heading-cool">
+                    <Mail className="sidebar-icon-cool" /> Contact
                 </h2>
                 <div className="space-y-3">
                     <ContactItem icon={Mail} detail={personalData.email} href={`mailto:${personalData.email}`} />
@@ -98,12 +106,12 @@ export default function HomePage() {
             
             {/* --- SKILLS --- */}
             <section id="skills">
-                <h2 className="sidebar-heading">
-                    <Code className="sidebar-icon" /> Core Skills
+                <h2 className="sidebar-heading-cool">
+                    <Code className="sidebar-icon-cool" /> Core Skills
                 </h2>
                 <div className="flex flex-wrap gap-2">
                     {coreSkills.map((skill, index) => (
-                        <span key={skill} className="skill-badge animate-fade-in" style={{ animationDelay: `${0.1 + index * 0.05}s` }}>
+                        <span key={skill} className="skill-badge-cool animate-fade-in" style={{ animationDelay: `${0.1 + index * 0.05}s` }}>
                             {skill}
                         </span>
                     ))}
@@ -112,12 +120,12 @@ export default function HomePage() {
 
             {/* --- LANGUAGES --- */}
             <section>
-                <h2 className="sidebar-heading">
-                    <Terminal className="sidebar-icon" /> Languages
+                <h2 className="sidebar-heading-cool">
+                    <Terminal className="sidebar-icon-cool" /> Languages
                 </h2>
                 <div className="space-y-2">
                     {languages.map((lang) => (
-                        <div key={lang.name} className="flex justify-between items-center pr-2">
+                        <div key={lang.name} className="flex justify-between items-center pr-2 p-1 rounded-sm hover:bg-white/10 transition-colors">
                             <span className="text-gray-300 font-medium">{lang.name.toUpperCase()}</span>
                             <StarRating count={lang.proficiency} />
                         </div>
@@ -127,18 +135,18 @@ export default function HomePage() {
 
             {/* --- PROJECTS / RESEARCH --- */}
             <section id="projects">
-                <h2 className="sidebar-heading">
-                    <Trophy className="sidebar-icon" /> Research Work
+                <h2 className="sidebar-heading-cool">
+                    <Trophy className="sidebar-icon-cool" /> Research Work
                 </h2>
                 <div className="space-y-3">
                     {projects.map((proj, index) => (
-                         <div key={index} className="project-card">
+                         <div key={index} className="project-card-cool">
                             <p className="font-medium text-gray-200">{proj.name}</p>
-                            <p className="text-xs text-amber-400 mt-0.5">{proj.type}</p>
+                            <p className="text-xs text-sky-400 mt-0.5">{proj.type}</p>
                             <div className="flex gap-1 mt-1">
-                                 {proj.tags.map(tag => (
-                                     <span key={tag} className="text-xs px-1.5 py-0.5 bg-gray-700 text-gray-400 rounded-full">{tag}</span>
-                                 ))}
+                                 {/* Secondary accents for tags */}
+                                 <span key={proj.tags[0]} className="text-xs px-1.5 py-0.5 bg-slate-700/70 text-gray-300 rounded-full">{proj.tags[0]}</span>
+                                 <span key={proj.tags[1]} className="text-xs px-1.5 py-0.5 bg-slate-700/70 text-gray-300 rounded-full">{proj.tags[1]}</span>
                             </div>
                         </div>
                     ))}
@@ -148,17 +156,18 @@ export default function HomePage() {
           </aside>
           
           {/* ==================================================== */}
-          {/* 2. MAIN CONTENT AREA (Objective, Experience, Education) */}
+          {/* 2. MAIN CONTENT AREA */}
           {/* ==================================================== */}
-          <main className="lg:col-span-2 p-8 space-y-12 animate-slide-in-right">
+          <main className="lg:col-span-2 p-10 space-y-12 animate-slide-in-right">
             
             {/* === 1. OBJECTIVE === */}
             <section id="objective" className="pt-24 -mt-24">
-                <h2 className="main-heading">
-                    <Zap className="main-icon" /> Objective
+                <h2 className="main-heading-cool">
+                    <Zap className="main-icon-cool" /> Professional Objective
                 </h2>
-                <div className="summary-box">
-                    <p className="text-gray-700 leading-relaxed italic">
+                {/* Accent box changed to Cyan/Sky Blue */}
+                <div className="summary-box-cool">
+                    <p className="text-gray-700 leading-relaxed text-lg italic">
                         To secure a challenging and rewarding teaching position where I can utilize my comprehensive academic knowledge in **Science and Molecular Biology** and my dedication to pedagogy to foster a deeper understanding of scientific concepts in students, thereby contributing to the provision of quality education.
                     </p>
                 </div>
@@ -169,17 +178,17 @@ export default function HomePage() {
             
             {/* === 2. PROFESSIONAL EXPERIENCE === */}
             <section id="experience" className="pt-24 -mt-24">
-                <h2 className="main-heading">
-                    <Briefcase className="main-icon" /> Professional Experience
+                <h2 className="main-heading-cool">
+                    <Briefcase className="main-icon-cool" /> Professional Experience
                 </h2>
-                <div className="space-y-8">
+                <div className="space-y-10">
                     {experienceTimeline.map((item, index) => (
-                        <div key={index} className="experience-card">
+                        <div key={index} className="experience-card-cool">
                             <h3 className="text-xl font-bold text-gray-800">{item.title} - {item.institution}</h3>
-                            <p className="text-sm text-teal-600 italic mb-2">{item.period}</p>
+                            <p className="text-sm text-cyan-700 italic mb-2 font-semibold">{item.period}</p>
                             <ul className="list-disc list-inside text-gray-600 space-y-1 ml-2">
                                 {item.details.map((detail, idx) => (
-                                    <li key={idx} className="text-sm">{detail}</li>
+                                    <li key={idx} className="text-base">{detail}</li>
                                 ))}
                             </ul>
                         </div>
@@ -192,20 +201,20 @@ export default function HomePage() {
             
             {/* === 3. EDUCATION & ACADEMICS === */}
             <section id="education" className="pt-24 -mt-24">
-                <h2 className="main-heading">
-                    <GraduationCap className="main-icon" /> Education & Qualifications
+                <h2 className="main-heading-cool">
+                    <GraduationCap className="main-icon-cool" /> Education & Qualifications
                 </h2>
                 <Timeline data={educationTimeline} />
             </section>
             
             {/* === 4. CERTIFICATIONS & AWARDS === */}
             <section>
-                 <h2 className="main-heading">
-                    <Trophy className="main-icon" /> Awards & Certifications
+                 <h2 className="main-heading-cool">
+                    <Trophy className="main-icon-cool" /> Awards & Certifications
                 </h2>
-                 <ul className="list-disc list-inside text-gray-600 space-y-2 ml-4 p-4 border rounded-md hover:shadow-sm transition-shadow">
-                    <li className="text-base hover:text-teal-600 transition-colors">Molecular Biology and Biochemistry Technique Certificate</li>
-                    <li className="text-base hover:text-teal-600 transition-colors">Teaching Training Certificate</li>
+                 <ul className="list-disc list-inside text-gray-600 space-y-2 ml-4 p-4 border border-gray-200 rounded-md hover:shadow-lg transition-shadow">
+                    <li className="text-base hover:text-cyan-700 transition-colors">Molecular Biology and Biochemistry Technique Certificate</li>
+                    <li className="text-base hover:text-cyan-700 transition-colors">Teaching Training Certificate</li>
                 </ul>
             </section>
 
@@ -213,7 +222,7 @@ export default function HomePage() {
         </div>
         
         {/* --- CV FOOTER --- */}
-        <footer className="bg-gray-900 py-4 text-center text-gray-600 border-t border-gray-800">
+        <footer className=" bg-slate-950 py-4 text-center text-gray-400 border-t border-slate-800">
             <p className="text-sm">Arfa Sultan Professional Portfolio | {new Date().getFullYear()}</p>
         </footer>
 
@@ -221,35 +230,35 @@ export default function HomePage() {
 
       {/* Tailwind Style Declarations & Keyframe Animations */}
       <style jsx global>{`
-        /* Sidebar Styles */
-        .sidebar-heading {
-          @apply text-lg font-bold mb-3 border-b border-gray-700 pb-1 flex items-center text-teal-400 tracking-wider;
+        /* --- COOL SIDEBAR STYLES (Slate/Cyan) --- */
+        .sidebar-heading-cool {
+          @apply text-xl font-bold mb-4 border-b border-slate-700 pb-2 flex items-center text-cyan-400 tracking-wider; 
         }
-        .sidebar-icon {
-          @apply w-5 h-5 mr-2 text-teal-400 flex-shrink-0;
+        .sidebar-icon-cool {
+          @apply w-6 h-6 mr-2 text-cyan-400 flex-shrink-0;
         }
-        .skill-badge {
-          @apply px-3 py-1 bg-gray-700 text-teal-300 text-xs font-medium rounded-md shadow-md transition-all duration-200 transform hover:scale-[1.05] hover:bg-gray-600 cursor-pointer;
+        .skill-badge-cool {
+          @apply px-3 py-1 bg-slate-700 text-cyan-300 text-sm font-medium rounded-full shadow-md transition-all duration-200 transform hover:scale-[1.05] hover:bg-cyan-600/50 cursor-pointer; 
         }
-        .project-card {
-            @apply border-l-2 border-amber-500 pl-3 p-2 transition-transform duration-200 hover:translate-x-1;
-        }
-
-        /* Main Content Styles */
-        .main-heading {
-          @apply text-3xl font-extrabold mb-6 border-b-4 border-indigo-500/50 pb-2 flex items-center text-gray-900 tracking-tight; /* Increased contrast to gray-900 */
-        }
-        .main-icon {
-          @apply w-7 h-7 mr-3 text-indigo-600 flex-shrink-0;
-        }
-        .summary-box {
-            @apply border-l-4 border-indigo-400 pl-4 bg-indigo-50 p-4 rounded-md shadow-sm; /* Added shadow for depth */
-        }
-        .experience-card {
-            @apply border-l-4 border-gray-300 pl-4 p-3 rounded-lg transition-all duration-300 hover:border-teal-500 hover:bg-teal-50/50 transform hover:scale-[1.005] cursor-pointer; /* Enhanced hover effect */
+        .project-card-cool {
+            @apply border-l-4 border-sky-500 pl-4 p-2 rounded-sm transition-transform duration-200 hover:translate-x-1 hover:bg-slate-800/50;
         }
 
-        /* --- Animations --- */
+        /* --- COOL MAIN CONTENT STYLES (Slate/Cyan) --- */
+        .main-heading-cool {
+          @apply text-4xl font-extrabold mb-8 border-b-4 border-cyan-600 pb-2 flex items-center text-gray-900 tracking-tight; 
+        }
+        .main-icon-cool {
+          @apply w-8 h-8 mr-4 text-cyan-600 flex-shrink-0; 
+        }
+        .summary-box-cool {
+            @apply border-l-4 border-cyan-500 pl-4 bg-cyan-50 p-5 rounded-lg shadow-md; 
+        }
+        .experience-card-cool {
+            @apply border-l-4 border-gray-300 pl-4 p-4 rounded-lg transition-all duration-300 hover:border-cyan-500 hover:bg-cyan-50/70 transform hover:translate-x-0.5 cursor-pointer; 
+        }
+
+        /* --- Animations (Unchanged) --- */
         .animate-slide-in-left {
           animation: slideInLeft 0.8s ease-out forwards;
           opacity: 0;
@@ -281,7 +290,7 @@ export default function HomePage() {
 }
 
 
-// --- Timeline Utility Component (Refined) ---
+// --- Timeline Utility Component (Cool Refinement) ---
 interface TimelineItem {
     year: string;
     institution: string;
@@ -290,13 +299,13 @@ interface TimelineItem {
 }
 
 const Timeline: React.FC<{ data: TimelineItem[] }> = ({ data }) => (
-  <div className="relative border-l-4 border-indigo-400 ml-4">
+  <div className="relative border-l-4  border-cyan-500 ml-4">
     {data.map((item, index) => (
-      <div key={index} className="mb-8 ml-6 relative p-3 bg-white border border-gray-200 rounded-lg shadow-md transition-shadow duration-300 hover:shadow-lg transform hover:scale-[1.01]">
-        {/* Timeline Dot (Stylized) */}
-        <div className="absolute -left-[37px] top-1 w-5 h-5 bg-teal-500 rounded-full border-4 border-white shadow-lg"></div>
+      <div key={index} className="mb-8 ml-6 relative p-4 bg-white border border-gray-200 rounded-lg shadow-md transition-shadow duration-300 hover:shadow-lg transform hover:scale-[1.01]">
+        {/* Timeline Dot (Stylized) - Cyan/Sky Blue */}
+        <div className="absolute -left-[37px] top-1 w-5 h-5 bg-cyan-500 rounded-full border-4 border-white shadow-lg"></div>
         
-        <p className="text-sm font-semibold text-indigo-600">{item.year}</p>
+        <p className="text-sm font-semibold text-cyan-600">{item.year}</p>
         <h3 className="text-xl font-bold text-gray-800 mt-1">{item.degree}</h3>
         <p className="text-base text-gray-600 italic mb-1">{item.institution}</p>
         <p className="text-sm text-gray-500">{item.detail}</p>

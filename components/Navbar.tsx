@@ -1,68 +1,123 @@
 // components/Navbar.tsx
 "use client";
 
-import React, { useState } from 'react';
-import { Menu, X } from 'lucide-react'; 
+import React, { useState, useEffect } from 'react';
+import { Menu, X, Mail } from 'lucide-react'; 
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  // State to track the currently active section
+  const [activeSection, setActiveSection] = useState('objective'); 
 
   const toggleMenu = () => setIsOpen(!isOpen);
   const closeMenu = () => setIsOpen(false);
 
-  // Defined color classes for the new light/minimalist theme
-  const accentColor = "text-teal-600"; // Primary accent color
-  const linkColor = "text-gray-700"; // Default link color
-  const hoverAccentColor = "hover:text-teal-600"; // Link hover color
-  const hoverBgColor = "hover:bg-teal-50"; // Subtle hover background
+  // --- Cool Slate & Cyan Palette ---
+  const accentColor = "text-cyan-600"; // Primary accent color (Cyan)
+  const linkColor = "text-gray-700"; 
+  const hoverAccentColor = "hover:text-cyan-600"; 
+  const hoverBgColor = "hover:bg-cyan-50"; 
+  const activeBorder = "border-b-4 border-cyan-500"; // Distinct active indicator
 
-  // Custom component for the internal anchor links (using native <a>)
-  const NavAnchor: React.FC<{ href: string; children: React.ReactNode }> = ({ href, children }) => (
-    <a 
-      href={href} 
-      onClick={closeMenu} 
-      // Minimalist desktop link style
-      className={`${linkColor} ${hoverAccentColor} text-base font-semibold transition-colors duration-200 px-3 py-2 rounded-lg ${hoverBgColor} border-b-2 border-transparent hover:border-teal-500`}
-    >
-      {children}
-    </a>
-  );
+  // Sections to observe for scrolling
+  const sections = ['objective', 'education', 'experience', 'skills', 'projects'];
+
+  // 🔥 NEW HANDLER: Forces the active state when a link is clicked
+  const handleAnchorClick = (sectionId: string) => {
+    setActiveSection(sectionId); // <-- This is the key fix
+    closeMenu(); // Closes mobile menu
+  };
+
+
+  // --- EFFECT: CORRECTED Scroll-Spy Logic for manual scrolling ---
+  useEffect(() => {
+    const handleScroll = () => {
+      let currentActive = 'objective'; 
+      let maxScrollDepth = -Infinity; 
+
+      for (const sectionId of sections) {
+        const section = document.getElementById(sectionId);
+        
+        if (section) {
+          const rect = section.getBoundingClientRect();
+          
+          // Condition 1: Check if the section top has scrolled up past the 200px threshold.
+          if (rect.top <= 200) { 
+            
+            // Condition 2: Select the section whose 'rect.top' is the largest (closest to 0).
+            if (rect.top > maxScrollDepth) { 
+                maxScrollDepth = rect.top;
+                currentActive = sectionId;
+            }
+          }
+        }
+      }
+      
+      // Update the state only if it has changed due to manual scroll
+      if (currentActive !== activeSection) {
+        setActiveSection(currentActive);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Initial check on load
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [activeSection, sections]); 
+  
+  // Custom component for the internal anchor links (Desktop)
+  const NavAnchor: React.FC<{ href: string; children: React.ReactNode }> = ({ href, children }) => {
+    const sectionId = href.substring(1); 
+    const isActive = activeSection === sectionId;
+
+    return (
+      <a 
+        href={href} 
+        // 👇 Using the new handler
+        onClick={() => handleAnchorClick(sectionId)} 
+        className={`${linkColor} ${hoverAccentColor} text-base font-semibold transition-all duration-300 px-3 py-2 rounded-lg ${hoverBgColor} 
+        ${isActive ? activeBorder + ' text-cyan-600' : 'border-b-2 border-transparent'}`}
+      >
+        {children}
+      </a>
+    );
+  };
   
   // Custom component for mobile link style
-  const NavAnchorMobile: React.FC<{ href: string; children: React.ReactNode }> = ({ href, children }) => (
+  const NavAnchorMobile: React.FC<{ href: string; children: React.ReactNode, hrefId: string }> = ({ href, children, hrefId }) => (
     <a 
       href={href} 
-      onClick={closeMenu} 
-      className={`block text-gray-700 hover:text-teal-600 hover:bg-gray-100 px-4 py-2 rounded-md text-base font-medium transition-colors duration-200`}
+      // 👇 Using the new handler
+      onClick={() => handleAnchorClick(hrefId)} 
+      className={`block px-4 py-2 rounded-md text-base font-medium transition-colors duration-200 
+        ${activeSection === hrefId ? 'text-white bg-cyan-600 shadow-md' : 'text-gray-700 hover:text-cyan-600 hover:bg-gray-100'}`}
     >
       {children}
     </a>
   );
 
   return (
-    // Updated background to white, added subtle border for separation
+    // Navbar design is clean and modern, sticking to the top
     <nav className="bg-white shadow-lg p-4 sticky top-0 z-50 transition-all duration-300 ease-in-out border-b border-gray-100">
       <div className="container mx-auto flex items-center justify-between max-w-7xl">
         
         {/* --- 1. Logo/Name (Left) --- */}
         <a 
           href="#objective" 
-          className={`text-2xl font-bold ${accentColor} transition-colors duration-200 tracking-wider flex-shrink-0`}
-          onClick={closeMenu}
+          className={`text-2xl font-extrabold text-slate-800 transition-colors duration-200 tracking-wider flex-shrink-0`}
+          onClick={() => handleAnchorClick('objective')}
         >
-          <span className="text-gray-900">Arfa Sultan </span>
-          <span className={accentColor}>CV</span>
+          Arfa Sultan <span className="text-cyan-600">CV</span>
         </a>
 
         {/* --- 2. Desktop Navigation Links (Centered) --- */}
-        {/* We use ml-auto/mr-auto to center the block of links in the middle */}
         <div className="hidden md:flex space-x-2 md:space-x-4 flex-grow justify-center">
           <div className="flex space-x-4">
             <NavAnchor href="#objective">Objective</NavAnchor>
             <NavAnchor href="#education">Education</NavAnchor>
             <NavAnchor href="#experience">Experience</NavAnchor>
             <NavAnchor href="#skills">Skills</NavAnchor>
-            <NavAnchor href="#projects">Projects</NavAnchor>
+            <NavAnchor href="#projects">Research</NavAnchor>
           </div>
         </div>
 
@@ -70,15 +125,15 @@ const Navbar: React.FC = () => {
         <div className="hidden md:flex flex-shrink-0">
           <a 
             href="mailto:arfasultan1998@gmail.com" 
-            className={`px-4 py-2 border border-teal-600 ${accentColor} rounded-full font-semibold transition-all duration-200 hover:bg-teal-600 hover:text-white`}
+            className={`px-4 py-2 border border-cyan-600 text-cyan-600 rounded-full font-semibold transition-all duration-200 hover:bg-cyan-600 hover:text-white flex items-center shadow-sm hover:shadow-lg`}
           >
-            Email Me
+            <Mail className="w-5 h-5 mr-2" /> Email Me
           </a>
         </div>
 
         {/* Mobile Menu Button (Right) */}
         <div className="md:hidden flex items-center">
-          <button onClick={toggleMenu} className={`text-gray-800 hover:text-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-500 rounded-md p-2`}>
+          <button onClick={toggleMenu} className={`text-gray-800 hover:text-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-500 rounded-md p-2`}>
             {isOpen ? (
                 <X className="w-8 h-8" /> 
               ) : (
@@ -91,13 +146,14 @@ const Navbar: React.FC = () => {
       {/* Mobile Menu Content (Dropdown) */}
       <div className={`md:hidden ${isOpen ? 'block' : 'hidden'} bg-gray-50 mt-4 mx-auto rounded-lg shadow-inner border border-gray-200`}>
         <div className="space-y-1 px-4 py-3">
-          <NavAnchorMobile href="#objective">Objective</NavAnchorMobile>
-          <NavAnchorMobile href="#education">Education</NavAnchorMobile>
-          <NavAnchorMobile href="#experience">Experience</NavAnchorMobile>
-          <NavAnchorMobile href="#skills">Skills</NavAnchorMobile>
-          <NavAnchorMobile href="#projects">Projects</NavAnchorMobile>
-          <a href="mailto:arfasultan1998@gmail.com" onClick={closeMenu} className={`block text-gray-700 hover:text-teal-600 hover:bg-gray-100 px-4 py-2 rounded-md text-base font-medium transition-colors duration-200`}>
-            Email Me
+          {/* Using the handleAnchorClick via NavAnchorMobile */}
+          <NavAnchorMobile href="#objective" hrefId="objective">Objective</NavAnchorMobile>
+          <NavAnchorMobile href="#education" hrefId="education">Education</NavAnchorMobile>
+          <NavAnchorMobile href="#experience" hrefId="experience">Experience</NavAnchorMobile>
+          <NavAnchorMobile href="#skills" hrefId="skills">Skills</NavAnchorMobile>
+          <NavAnchorMobile href="#projects" hrefId="projects">Research</NavAnchorMobile>
+          <a href="mailto:arfasultan1998@gmail.com" onClick={closeMenu} className={`flex items-center text-gray-700 hover:text-cyan-600 hover:bg-gray-100 px-4 py-2 rounded-md text-base font-medium transition-colors duration-200`}>
+            <Mail className="w-5 h-5 mr-2" /> Email Me
           </a>
         </div>
       </div>
