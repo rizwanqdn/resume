@@ -5,7 +5,7 @@ import Navbar from '../../components/Navbar';
 import { Mail, Phone, MapPin, GraduationCap, Briefcase, Zap, Star, Code, Terminal, Trophy, User } from 'lucide-react'; 
 
 
-// --- Data Structure (Unchanged) ---
+// --- Data Structure (Updated with Soft Skills) ---
 const personalData = {
   name: "Arfa Sultan",
   title: "Science & Technology Educator | Molecular Biologist",
@@ -18,11 +18,11 @@ const educationTimeline = [
   { year: '2025 (Completed)', institution: 'Guru Nanak University, Amritsar', degree: 'Master of Education (M.Ed.)', detail: 'Advanced studies in pedagogical theory and educational research.' },
   { year: '2023', institution: 'Shivalik College Of Education, Gurdaspur (GNDU)', degree: 'Bachelor of Education (B.Ed.)', detail: 'Specialized training in secondary teaching methodologies and classroom practices.' },
   { year: '2021', institution: 'Guru Nanak Dev University (GNDU), Amritsar', degree: 'Master of Science (M.Sc.)', detail: 'Molecular Biology & Biochemistry. Focused on advanced life science research and techniques.' },
-  { year: '2018', institution: 'GGDSD College, Chandigarh (Punjab University)', degree: 'Bachelor of Science (B.Sc.)', detail: 'Medical stream (Botany, Zoology, Chemistry).' },
+  { year: '2018', institution: 'GGDSD College, Chandigarh (Punjab University)', degree: 'Bachelor of Science (B.Sc.)', detail: 'Medical stream (Biology,Chemistry).' },
 ];
 
 const experienceTimeline = [
-  { period: '1 Year', title: 'Secondary Teacher', institution: 'SRI DASMESH SEN SEC SCHOOL', details: ['Applied subject matter expertise to teach science concepts.', 'Focused on student engagement and concept clarity to improve learning outcomes.', 'Achieved 90%+ pass rate in final exams.' ] },
+  { period: '1 Year', title: 'Secondary Teacher', institution: 'SRI DASMESH SEN SEC SCHOOL', details: ['Applied subject matter expertise to teach science concepts.', 'Focused on student engagement and concept clarity to improve learning outcomes.', 'Achieved 80%+ pass rate in final exams.' ] },
   { period: '4 Months (Internship)', title: 'Secondary Teacher Intern', institution: 'Govt. Self Made Smart School, Kahlwan (Gurdaspur)', details: ['Conducted rigorous lesson planning and preparation.', 'Practiced effective classroom management and integrated basic classroom technologies.', 'Assisted in developing digital teaching aids.' ] },
 ];
 
@@ -30,6 +30,15 @@ const coreSkills = [
   'Lesson Planning & Preparation', 'Classroom Technologies Integration', 
   'Laboratory Equipment Use', 'Classroom Management', 'Good Communication', 
   'Communication with Parents', 'Problem Solving', 'MS – Office Basics'
+];
+
+// --- NEW SOFT SKILLS DATA STRUCTURE ---
+const softSkills = [
+    { name: 'Creativity', proficiency: 5 },
+    { name: 'Imaginative', proficiency: 4 },
+    { name: 'Communication', proficiency: 5 },
+    { name: 'Positive Attitude', proficiency: 5 },
+    { name: 'Decision Making', proficiency: 4 },
 ];
 
 const projects = [
@@ -45,7 +54,6 @@ const languages = [
 
 // --- Utility Components ---
 
-// Accent color changed to Cyan-400
 const ContactItem: React.FC<{ icon: React.ElementType, detail: string, href: string }> = ({ icon: Icon, detail, href }) => (
     <a href={href} target="_blank" rel="noopener noreferrer" className="flex items-center text-sm text-gray-300 hover:text-cyan-300 transition-colors group">
         <Icon className="w-4 h-4 mr-2 text-cyan-400 group-hover:text-cyan-300 flex-shrink-0" />
@@ -64,7 +72,7 @@ const StarRating: React.FC<{ count: number }> = ({ count }) => (
 
 // --- Main Page Component ---
 export default function HomePage() {
-  return (
+  return ( 
     // Background: Used Blue-Gray 900 for a deep, modern slate background
     <div className="min-h-screen bg-gray-100 text-gray-800 font-sans antialiased">
       
@@ -79,14 +87,12 @@ export default function HomePage() {
           {/* ==================================================== */}
           {/* 1. SIDEBAR (Slate Blue Background) */}
           {/* ==================================================== */}
-          {/* bg-slate-900 or bg-blue-gray-900 (using Tailwind's blue-gray equivalent, or just a dark blue-gray) */}
           <aside className="lg:col-span-1 bg-slate-900 text-gray-100 p-8 space-y-10 border-r border-slate-700/50 animate-slide-in-left">
             
             {/* --- PERSONAL INFO / AVATAR --- */}
             <header className="text-center">
-              {/* Accent color changed to Cyan-500 */}
               <div className="w-28 h-28 mx-auto rounded-full bg-cyan-500 border-4 border-cyan-300 mb-4 flex items-center justify-center text-4xl font-bold shadow-2xl">
-                  <User className="w-14 h-14 text-slate-900" /> {/* Changed icon color for contrast */}
+                  <User className="w-14 h-14 text-slate-900" /> 
               </div>
               <h1 className="text-4xl font-extrabold tracking-tight text-white">{personalData.name.toUpperCase()}</h1>
               <p className="text-base font-light text-cyan-300 mt-1">{personalData.title}</p>
@@ -104,8 +110,8 @@ export default function HomePage() {
                 </div>
             </section>
             
-            {/* --- SKILLS --- */}
-            <section id="skills">
+            {/* --- CORE SKILLS --- */}
+            <section id="coreskills">
                 <h2 className="sidebar-heading-cool">
                     <Code className="sidebar-icon-cool" /> Core Skills
                 </h2>
@@ -117,6 +123,22 @@ export default function HomePage() {
                     ))}
                 </div>
             </section>
+
+            {/* --- NEW: SOFT SKILLS --- */}
+            <section id="softskills">
+                <h2 className="sidebar-heading-cool">
+                    <Zap className="sidebar-icon-cool" /> Soft Skills
+                </h2>
+                <div className="space-y-2">
+                    {softSkills.map((skill) => (
+                        <div key={skill.name} className="flex justify-between items-center pr-2 p-1 rounded-sm hover:bg-white/10 transition-colors">
+                            <span className="text-gray-300 font-medium">{skill.name.toUpperCase()}</span>
+                            <StarRating count={skill.proficiency} />
+                        </div>
+                    ))}
+                </div>
+            </section>
+
 
             {/* --- LANGUAGES --- */}
             <section>
@@ -207,7 +229,28 @@ export default function HomePage() {
                 <Timeline data={educationTimeline} />
             </section>
             
-            {/* === 4. CERTIFICATIONS & AWARDS === */}
+            {/* --- HORIZONTAL LINE --- */}
+            <div className="h-px bg-gray-200" />
+
+            {/* === 4. RESEARCH PUBLICATION (NEW SECTION) === */}
+            <section id="research" className="pt-24 -mt-24">
+                <h2 className="main-heading-cool">
+                    <Code className="main-icon-cool" /> Research Publication
+                </h2>
+                <div className="pl-4 p-4 border-l-4 border-cyan-500 bg-cyan-50/50 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                    <p className="font-semibold text-xl text-gray-800">
+                        EFFECT OF CONCEPT MAPPING STRATEGY ON HIGHER ORDER THINKING SKILLS AMONG SECONDARY SCHOOL STUDENTS.
+                    </p>
+                    <p className="text-sm text-gray-500 mt-1 italic">
+                        — Master of Education (M.Ed.) Research Paper
+                    </p>
+                </div>
+            </section>
+            
+            {/* --- HORIZONTAL LINE --- */}
+            <div className="h-px bg-gray-200" />
+
+            {/* === 5. CERTIFICATIONS & AWARDS (Moved to last) === */}
             <section>
                  <h2 className="main-heading-cool">
                     <Trophy className="main-icon-cool" /> Awards & Certifications
