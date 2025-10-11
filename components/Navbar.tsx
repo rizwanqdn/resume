@@ -4,38 +4,38 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Mail } from 'lucide-react'; 
 
+// FIX 2: Move the static array OUTSIDE the component to prevent re-creation on every render.
+const SECTIONS = ['objective', 'education', 'experience', 'skills', 'projects'];
+
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  // State to track the currently active section
   const [activeSection, setActiveSection] = useState('objective'); 
 
   const toggleMenu = () => setIsOpen(!isOpen);
   const closeMenu = () => setIsOpen(false);
 
   // --- Cool Slate & Cyan Palette ---
-  const accentColor = "text-cyan-600"; // Primary accent color (Cyan)
+  // FIX 1: Removed 'accentColor' variable as it was unused.
   const linkColor = "text-gray-700"; 
   const hoverAccentColor = "hover:text-cyan-600"; 
   const hoverBgColor = "hover:bg-cyan-50"; 
-  const activeBorder = "border-b-4 border-cyan-500"; // Distinct active indicator
-
-  // Sections to observe for scrolling
-  const sections = ['objective', 'education', 'experience', 'skills', 'projects'];
+  const activeBorder = "border-b-4 border-cyan-500"; 
 
   // 🔥 NEW HANDLER: Forces the active state when a link is clicked
   const handleAnchorClick = (sectionId: string) => {
-    setActiveSection(sectionId); // <-- This is the key fix
-    closeMenu(); // Closes mobile menu
+    setActiveSection(sectionId); 
+    closeMenu();
   };
 
 
-  // --- EFFECT: CORRECTED Scroll-Spy Logic for manual scrolling ---
+  // --- EFFECT: Corrected Scroll-Spy Logic for manual scrolling ---
   useEffect(() => {
     const handleScroll = () => {
       let currentActive = 'objective'; 
       let maxScrollDepth = -Infinity; 
 
-      for (const sectionId of sections) {
+      // Use the static SECTIONS array
+      for (const sectionId of SECTIONS) {
         const section = document.getElementById(sectionId);
         
         if (section) {
@@ -63,7 +63,8 @@ const Navbar: React.FC = () => {
     handleScroll(); // Initial check on load
 
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [activeSection, sections]); 
+    // FIX 2: Removed 'sections' from deps, which is now SECTIONS (static)
+  }, [activeSection]); 
   
   // Custom component for the internal anchor links (Desktop)
   const NavAnchor: React.FC<{ href: string; children: React.ReactNode }> = ({ href, children }) => {
@@ -73,7 +74,6 @@ const Navbar: React.FC = () => {
     return (
       <a 
         href={href} 
-        // 👇 Using the new handler
         onClick={() => handleAnchorClick(sectionId)} 
         className={`${linkColor} ${hoverAccentColor} text-base font-semibold transition-all duration-300 px-3 py-2 rounded-lg ${hoverBgColor} 
         ${isActive ? activeBorder + ' text-cyan-600' : 'border-b-2 border-transparent'}`}
@@ -87,7 +87,6 @@ const Navbar: React.FC = () => {
   const NavAnchorMobile: React.FC<{ href: string; children: React.ReactNode, hrefId: string }> = ({ href, children, hrefId }) => (
     <a 
       href={href} 
-      // 👇 Using the new handler
       onClick={() => handleAnchorClick(hrefId)} 
       className={`block px-4 py-2 rounded-md text-base font-medium transition-colors duration-200 
         ${activeSection === hrefId ? 'text-white bg-cyan-600 shadow-md' : 'text-gray-700 hover:text-cyan-600 hover:bg-gray-100'}`}
