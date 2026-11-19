@@ -3,14 +3,12 @@ import "./globals.css";
 import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans, Sora } from "next/font/google";
 
-// Body font: friendly, highly readable, modern
 const body = Plus_Jakarta_Sans({
   subsets: ["latin"],
   variable: "--font-body",
   display: "swap",
 });
 
-// Display font: used for headings (h1–h3)
 const display = Sora({
   subsets: ["latin"],
   variable: "--font-display",
@@ -33,7 +31,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#05060a",
+  themeColor: "#060913",
 };
 
 export default function RootLayout({
@@ -42,11 +40,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${body.variable} ${display.variable}`}>
+    <html
+      lang="en"
+      className={`${body.variable} ${display.variable} scroll-smooth`}
+    >
       <body
-        className={`${body.className} antialiased flex min-h-screen flex-col`}
+        className={`${body.className} min-h-screen bg-[#060913] text-slate-200 antialiased`}
       >
-        <main className="flex-grow">{children}</main>
+        {children}
       </body>
     </html>
   );

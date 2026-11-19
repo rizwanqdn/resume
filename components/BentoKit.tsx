@@ -4,7 +4,53 @@
 import React, { useEffect, useRef, useState, type ReactNode } from "react";
 import { Menu, X, Check, Copy, Printer } from "lucide-react";
 import "./bento.css";
+// Add to imports at the top of components/BentoKit.tsx:
+import Image from "next/image";
+import { Dna } from "lucide-react";
 
+/* ------------------------------------------------------------------ */
+/* Profile Avatar with hover zoom + graceful initials fallback         */
+/* ------------------------------------------------------------------ */
+export function ProfileAvatar({
+  src,
+  alt,
+  initials = "AS",
+}: {
+  src: string;
+  alt: string;
+  initials?: string;
+}) {
+  const [imgError, setImgError] = useState(false);
+
+  return (
+    <div className="helix-float group relative mb-5">
+      {/* Ambient glow */}
+      <div className="absolute -inset-2 rounded-full bg-gradient-to-tr from-cyan-400/40 via-indigo-500/40 to-teal-300/40 blur-lg transition-opacity duration-300 group-hover:opacity-100" />
+
+      {/* Circular frame */}
+      <div className="relative flex h-28 w-28 items-center justify-center overflow-hidden rounded-full border-2 border-white/20 bg-slate-950 text-3xl font-extrabold tracking-tight text-white">
+        {!imgError ? (
+          <Image
+            src={src}
+            alt={alt}
+            fill
+            priority
+            sizes="112px"
+            onError={() => setImgError(true)}
+            className="object-cover object-top transition-transform duration-500 ease-out group-hover:scale-110"
+          />
+        ) : (
+          <span>{initials}</span>
+        )}
+      </div>
+
+      {/* DNA badge */}
+      <span className="absolute -bottom-1 -right-1 z-10 flex h-9 w-9 items-center justify-center rounded-full border border-slate-900 bg-gradient-to-br from-cyan-400 to-indigo-500 text-slate-950 shadow-lg transition-transform duration-300 group-hover:rotate-12 group-hover:scale-105">
+        <Dna className="h-4 w-4" />
+      </span>
+    </div>
+  );
+}
 /* ------------------------------------------------------------------ */
 /* Scroll Reveal                                                       */
 /* ------------------------------------------------------------------ */

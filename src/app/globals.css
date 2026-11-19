@@ -1,8 +1,6 @@
 @import "tailwindcss";
 
-
 @theme inline {
-
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -15,13 +13,165 @@
 }
 
 body {
-
-  
   font-family: Arial, Helvetica, sans-serif;
 }
 
-
 html {
   /* This is the key line for smooth scrolling */
-  scroll-behavior: smooth; 
+  scroll-behavior: smooth;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display), sans-serif;
+}
+
+/* app/globals.css */
+h1,
+h2,
+h3 {
+  font-family: var(--font-display), sans-serif;
+}
+
+/* ================================================================== */
+/* Print / Save as PDF Resume Styles                                  */
+/* ================================================================== */
+@page {
+  size: A4;
+  margin: 12mm;
+}
+
+@media print {
+  /* Preserve subtle badge/meter colors */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  html,
+  body,
+  body > div {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    font-size: 11pt !important;
+  }
+
+  /* Hide decorative backgrounds, navbar, and scroll animations */
+  .bio-grid,
+  .aurora,
+  .aurora-2,
+  .spotlight::before,
+  .spotlight::after,
+  header {
+    display: none !important;
+  }
+
+  /* Ensure un-scrolled reveal blocks are fully visible */
+  .bento-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* Tighten page & section spacing for 1–2 clean pages */
+  main {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    max-width: 100% !important;
+  }
+
+  section {
+    padding-top: 0.85rem !important;
+    padding-bottom: 0.85rem !important;
+  }
+
+  /* Convert dark glass cards into clean bordered resume blocks */
+  .spotlight {
+    background: #ffffff !important;
+    border: 1px solid #cbd5e1 !important;
+    border-radius: 12px !important;
+    padding: 1rem !important;
+    backdrop-filter: none !important;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Fix gradient text so it doesn't print transparent */
+  .gradient-pan,
+  [class*="bg-clip-text"] {
+    background: none !important;
+    -webkit-text-fill-color: #0e7490 !important;
+    color: #0e7490 !important;
+  }
+
+  /* High-contrast text overrides for dark-mode classes */
+  h1,
+  h2,
+  h3,
+  [class*="text-white"] {
+    color: #0f172a !important;
+  }
+
+  [class*="text-slate-200"],
+  [class*="text-slate-300"] {
+    color: #1e293b !important;
+  }
+
+  [class*="text-slate-400"],
+  [class*="text-slate-500"] {
+    color: #475569 !important;
+  }
+
+  [class*="text-cyan-"],
+  [class*="text-indigo-"],
+  [class*="text-emerald-"] {
+    color: #0e7490 !important;
+  }
+
+  /* Clean borders and pill backgrounds */
+  [class*="border-white"] {
+    border-color: #e2e8f0 !important;
+  }
+
+  [class*="bg-white/"],
+  [class*="bg-cyan-"],
+  [class*="bg-emerald-"],
+  [class*="bg-slate-950"] {
+    background-color: #f8fafc !important;
+  }
+
+  /* Make segmented skill meters crisp in print */
+  .seg {
+    opacity: 1 !important;
+    transform: scaleY(1) !important;
+    background: #e2e8f0 !important;
+  }
+  .seg.on {
+    background: #0e7490 !important;
+  }
+
+  /* Stop marquee animation and wrap skills cleanly */
+  .marquee {
+    mask-image: none !important;
+    -webkit-mask-image: none !important;
+  }
+  .marquee-track {
+    animation: none !important;
+    flex-wrap: wrap !important;
+    width: auto !important;
+    gap: 0.4rem !important;
+  }
+  /* Hide the duplicated second half of the 8 marquee items */
+  .marquee-track > span:nth-child(n + 9) {
+    display: none !important;
+  }
+
+  /* Hide web-only action buttons (Explore/Research/Contact CTAs) */
+  a[href="#experience"],
+  a[href="#research"],
+  #contact {
+    display: none !important;
+  }
 }

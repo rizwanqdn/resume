@@ -6,6 +6,7 @@ import {
   Marquee,
   CopyPill,
   BentoReveal,
+  ProfileAvatar,
 } from "../../components/BentoKit";
 import {
   Mail,
@@ -19,7 +20,6 @@ import {
   Sparkles,
   ArrowUpRight,
   CheckCircle2,
-  Dna,
   Microscope,
   Languages,
 } from "lucide-react";
@@ -29,6 +29,8 @@ import {
 // ------------------------------------------------------------------
 const personalData = {
   name: "Arfa Sultan",
+  initials: "AS",
+  avatar: "/profile.jpg",
   title: "Science & Technology Educator",
   subtitle: "Molecular Biologist",
   email: "arfasultan1998@gmail.com",
@@ -253,15 +255,11 @@ export default function HomePage() {
             {/* Right Bio-Profile Card */}
             <div className="lg:col-span-4">
               <SpotlightCard className="flex flex-col items-center justify-center p-8 text-center">
-                <div className="helix-float relative mb-5">
-                  <div className="absolute -inset-2 rounded-full bg-gradient-to-tr from-cyan-400/40 via-indigo-500/40 to-teal-300/40 blur-lg" />
-                  <div className="relative flex h-28 w-28 items-center justify-center rounded-full border border-white/20 bg-slate-950 text-3xl font-extrabold tracking-tight text-white">
-                    AS
-                    <span className="absolute -bottom-1 -right-1 flex h-9 w-9 items-center justify-center rounded-full border border-slate-900 bg-gradient-to-br from-cyan-400 to-indigo-500 text-slate-950 shadow-lg">
-                      <Dna className="h-4 w-4" />
-                    </span>
-                  </div>
-                </div>
+                <ProfileAvatar
+                  src={personalData.avatar}
+                  alt={personalData.name}
+                  initials={personalData.initials}
+                />
 
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-300">
                   M.Ed. · M.Sc. (Mol. Bio)
