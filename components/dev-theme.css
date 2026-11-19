@@ -1,0 +1,92 @@
+/* components/dev-theme.css */
+
+/* Architectural hairline grid */
+.dev-grid {
+  background-size: 48px 48px;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  mask-image: radial-gradient(
+    ellipse 90% 70% at 50% 0%,
+    #000 35%,
+    transparent 100%
+  );
+}
+
+/* Subtle top amber beam */
+.amber-glow {
+  background: radial-gradient(
+    ellipse 60% 40% at 50% -10%,
+    rgba(245, 158, 11, 0.14),
+    rgba(16, 185, 129, 0.05) 55%,
+    transparent 80%
+  );
+}
+
+/* Smooth reveal */
+.dev-reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.dev-reveal.is-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dev-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* Clean print / PDF export */
+@media print {
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    box-shadow: none !important;
+  }
+  html,
+  body {
+    background: #ffffff !important;
+    color: #09090b !important;
+  }
+  .dev-grid,
+  .amber-glow,
+  .no-print {
+    display: none !important;
+  }
+  .dev-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  aside {
+    position: static !important;
+    height: auto !important;
+    border: none !important;
+  }
+  [class*="bg-zinc-9"],
+  [class*="bg-[#09090b]"] {
+    background: #ffffff !important;
+  }
+  [class*="text-white"],
+  [class*="text-zinc-1"],
+  [class*="text-zinc-2"] {
+    color: #09090b !important;
+  }
+  [class*="text-zinc-4"],
+  [class*="text-zinc-5"] {
+    color: #52525b !important;
+  }
+  [class*="text-amber-"] {
+    color: #b45309 !important;
+  }
+  [class*="border-zinc-8"] {
+    border-color: #e4e4e7 !important;
+  }
+}

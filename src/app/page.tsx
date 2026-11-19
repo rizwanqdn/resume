@@ -1,168 +1,173 @@
 // app/page.tsx
 import {
-  FloatingNav,
-  SpotlightCard,
-  SegMeter,
-  Marquee,
-  CopyPill,
-  BentoReveal,
-  ProfileAvatar,
-} from "../../components/BentoKit";
+  DevReveal,
+  RailNav,
+  CopyAction,
+  PrintResumeButton,
+  ProjectShowcase,
+  type ProjectItem,
+} from "../../components/DevKit";
 import {
   Mail,
   Phone,
   MapPin,
-  GraduationCap,
   Briefcase,
-  FlaskConical,
-  Award,
-  BookOpen,
-  Sparkles,
-  ArrowUpRight,
+  GraduationCap,
+  Cpu,
+  Layers,
+  Globe,
   CheckCircle2,
-  Microscope,
-  Languages,
+  Sparkles,
+  Code2,
 } from "lucide-react";
 
 // ------------------------------------------------------------------
-// Data
+// Resume Data (Rizwan Ahmad Zafar)
 // ------------------------------------------------------------------
-const personalData = {
-  name: "Arfa Sultan",
-  initials: "AS",
-  avatar: "/profile.jpg",
-  title: "Science & Technology Educator",
-  subtitle: "Molecular Biologist",
-  email: "arfasultan1998@gmail.com",
-  mobile: "7973685418",
-  location: "Qadian, Punjab",
-  address: "Mohalla Ahmadiyya Qadian, Ward No 8",
+const profile = {
+  name: "Rizwan Ahmad Zafar",
+  initials: "RZ",
+  role: "Full Stack Web Developer",
+  tagline: "Next.js · React · TypeScript · Generative AI (LangChain.js)",
+  email: "rizwan1022@icloud.com",
+  phone: "9877434419",
+  shortLocation: "Qadian, Punjab, India",
+  fullAddress:
+    "Ward No. 8, Mohalla Ahmadiyya, Qadian, District Gurdaspur, Punjab, India — 143516",
+  summary:
+    "Results-driven Full Stack Web Developer with a Master's degree in Information Technology and hands-on expertise in building dynamic, scalable web applications using Next.js, React, and TypeScript, paired with Generative AI integration via LangChain.js. Combines modern engineering with 6+ years of prior data management and administrative experience.",
 };
 
-const educationTimeline = [
+const experience = [
   {
-    year: "2025",
-    institution: "Guru Nanak Dev University, Amritsar",
-    degree: "Master of Education (M.Ed.)",
-    detail: "Advanced studies in pedagogical theory and educational research.",
+    period: "2021 — Present",
+    role: "Full Stack Web Developer",
+    company: "Newstep Computer Essentials",
+    type: "Engineering",
+    points: [
+      "Design and maintain responsive, high-performance web applications using React, Next.js, and TypeScript.",
+      "Integrate Generative AI capabilities into platforms using LangChain.js to enhance user experience and automate complex workflows.",
+      "Optimize backend architecture and database integrity across MongoDB and SQL for seamless communication.",
+      "Manage full-lifecycle development from requirements gathering to deployment and continuous maintenance.",
+    ],
   },
+  {
+    period: "2015 — 2021",
+    role: "Administrative & Data Specialist",
+    company: "Sadr Anjuman",
+    type: "Operations & Data",
+    points: [
+      "Managed day-to-day organizational documentation, reporting, and high-accuracy data entry.",
+      "Streamlined internal processes and maintained structured records with strong attention to detail, bridging administrative operations with IT workflows.",
+    ],
+  },
+];
+
+const projects: ProjectItem[] = [
+  {
+    id: "PRJ-01",
+    name: "TutorWave",
+    category: "Full Stack",
+    role: "Lead Full Stack Developer",
+    description:
+      "Comprehensive online tutoring platform designed to connect students and educators with interactive learning workflows.",
+    highlight: "End-to-end scalable architecture & real-time experience",
+    stack: ["Next.js", "React", "TypeScript", "MongoDB"],
+  },
+  {
+    id: "PRJ-02",
+    name: "SFC E-Commerce",
+    category: "E-Commerce",
+    role: "Full Stack Developer",
+    description:
+      "Fast-food delivery e-commerce platform featuring menu browsing, cart management, and complete online ordering functionality.",
+    highlight: "Streamlined checkout & responsive ordering UX",
+    stack: ["Next.js", "TypeScript", "MongoDB", "CSS"],
+  },
+  {
+    id: "PRJ-03",
+    name: "Architectural Firm Portfolio",
+    category: "Web",
+    role: "Frontend & UI Engineer",
+    description:
+      "Modern digital portfolio website crafted for an architectural firm to showcase spaces, concepts, and design projects.",
+    highlight: "Editorial layout & high-impact visual presentation",
+    stack: ["React", "Next.js", "TypeScript", "CSS"],
+  },
+  {
+    id: "PRJ-04",
+    name: "Community & Organizational Web Solutions",
+    category: "Web",
+    role: "Web Developer",
+    description:
+      "Tailored digital platforms and web tools built to serve specialized community and religious organizational needs.",
+    highlight: "Accessible, maintainable web interfaces",
+    stack: ["HTML", "CSS", "React", "SQL"],
+  },
+];
+
+const skillGroups = [
+  {
+    title: "Frontend Development",
+    items: ["React.js", "Next.js", "TypeScript", "HTML5", "CSS3"],
+  },
+  {
+    title: "Backend & Databases",
+    items: ["Python", "MongoDB", "SQL"],
+  },
+  {
+    title: "AI & Integration",
+    items: ["Generative AI", "LangChain.js", "Workflow Automation"],
+  },
+  {
+    title: "Tools & Soft Skills",
+    items: [
+      "PyCharm",
+      "MS Office Suite (Word, Excel)",
+      "Problem Solving",
+      "Time Management",
+      "Adaptability",
+    ],
+  },
+];
+
+const education = [
   {
     year: "2023",
-    institution: "Shivalik College of Education, Gurdaspur (GNDU)",
-    degree: "Bachelor of Education (B.Ed.)",
-    detail:
-      "Specialized training in secondary teaching methodologies and classroom practices.",
+    degree: "Master of Science in Information Technology (M.Sc. IT)",
+    school: "Sikh National College, Qadian · Guru Nanak Dev University",
   },
   {
-    year: "2021",
-    institution: "Guru Nanak Dev University (GNDU), Amritsar",
-    degree: "Master of Science (M.Sc.)",
-    detail:
-      "Molecular Biology & Biochemistry. Focused on advanced life science research and lab techniques.",
-  },
-  {
-    year: "2018",
-    institution: "GGDSD College, Chandigarh (Panjab University)",
-    degree: "Bachelor of Science (B.Sc.)",
-    detail: "Medical stream — Biology & Chemistry.",
+    year: "2016 — 2019",
+    degree: "Bachelor of Arts (B.A.)",
+    school: "Sikh National College, Qadian · Guru Nanak Dev University",
   },
 ];
 
-const experienceTimeline = [
-  {
-    period: "1 Year",
-    badge: "Full-Time",
-    title: "Secondary Teacher",
-    institution: "Sri Dasmesh Sen Sec School",
-    details: [
-      "Applied subject matter expertise to teach secondary science concepts.",
-      "Focused on student engagement and concept clarity to elevate learning outcomes.",
-      "Achieved an 80%+ pass rate in final examinations.",
-    ],
-  },
-  {
-    period: "4 Months",
-    badge: "Internship",
-    title: "Secondary Teacher Intern",
-    institution: "Govt. Self Made Smart School, Kahlwan (Gurdaspur)",
-    details: [
-      "Conducted structured lesson planning and daily curriculum preparation.",
-      "Practiced classroom management and integrated smart classroom technologies.",
-      "Assisted in designing interactive digital teaching aids.",
-    ],
-  },
-];
-
-const coreSkills = [
-  "Lesson Planning & Preparation",
-  "Classroom Technologies Integration",
-  "Laboratory Equipment Use",
-  "Classroom Management",
-  "Parent-Teacher Communication",
-  "Problem Solving",
-  "Concept Mapping Pedagogy",
-  "MS Office Basics",
-];
-
-const softSkills = [
-  { name: "Creativity", proficiency: 5 },
-  { name: "Communication", proficiency: 5 },
-  { name: "Positive Attitude", proficiency: 5 },
-  { name: "Imaginative", proficiency: 4 },
-  { name: "Decision Making", proficiency: 4 },
-];
-
-const languages = [
-  { name: "English", proficiency: 5 },
-  { name: "Hindi", proficiency: 4 },
-  { name: "Punjabi", proficiency: 4 },
-];
-
-const projects = [
-  {
-    code: "LAB-01",
-    name: "Develop Nanoparticles from Cloves",
-    type: "Research Project",
-    summary:
-      "Green synthesis approach exploring clove-derived extracts for nanoparticle formulation and biochemical characterization.",
-    tags: ["Nanotechnology", "Biochemistry", "Green Synthesis"],
-  },
-  {
-    code: "REV-02",
-    name: "Recent Progress on CRISPR-Cas9 Technology",
-    type: "Review Project",
-    summary:
-      "Comprehensive review of genome-editing mechanisms, therapeutic breakthroughs, and contemporary molecular applications.",
-    tags: ["Molecular Biology", "Gene Editing", "CRISPR"],
-  },
-];
-
-const certifications = [
-  "Molecular Biology and Biochemistry Technique Certificate",
-  "Teaching Training Certificate",
-];
+const languages = ["English", "Hindi", "Urdu", "Punjabi", "Arabic"];
 
 // ------------------------------------------------------------------
-// Section Label Helper
+// Section Title Helper
 // ------------------------------------------------------------------
-function SectionHeader({
-  eyebrow,
+function SectionTitle({
+  index,
   title,
   icon: Icon,
 }: {
-  eyebrow: string;
+  index: string;
   title: string;
   icon: React.ElementType;
 }) {
   return (
-    <BentoReveal className="mb-8 flex flex-col gap-2">
-      <span className="inline-flex w-fit items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-cyan-300">
-        <Icon className="h-3.5 w-3.5" /> {eyebrow}
+    <div className="mb-6 flex items-center gap-3 border-b border-zinc-800/80 pb-4">
+      <span className="font-mono text-xs font-semibold text-amber-400">
+        {index}
       </span>
-      <h2 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
+      <Icon className="h-4 w-4 text-zinc-400" />
+      <h2 className="text-lg font-bold tracking-tight text-white sm:text-xl">
         {title}
       </h2>
-    </BentoReveal>
+    </div>
   );
 }
 
@@ -171,422 +176,279 @@ function SectionHeader({
 // ------------------------------------------------------------------
 export default function HomePage() {
   return (
-    <div className="relative min-h-screen overflow-x-clip bg-[#060913] text-slate-200 antialiased selection:bg-cyan-400/30 selection:text-cyan-100">
-      {/* Ambient Background Layers */}
+    <div className="relative min-h-screen bg-[#09090b] text-zinc-200 antialiased selection:bg-amber-400/25 selection:text-amber-200">
+      {/* Background Layers */}
       <div className="pointer-events-none fixed inset-0 z-0">
-        <div className="bio-grid absolute inset-0" />
-        <div className="aurora absolute -left-32 top-0 h-[34rem] w-[34rem] rounded-full bg-cyan-500/12 blur-[120px]" />
-        <div className="aurora-2 absolute -right-32 top-1/3 h-[34rem] w-[34rem] rounded-full bg-indigo-600/14 blur-[120px]" />
+        <div className="amber-glow absolute inset-0" />
+        <div className="dev-grid absolute inset-0" />
       </div>
 
-      <FloatingNav />
+      {/* Split-Pane Layout */}
+      <div className="relative z-10 mx-auto max-w-6xl px-5 py-10 lg:grid lg:grid-cols-12 lg:gap-12 lg:py-16">
+        {/* ================= LEFT STICKY IDENTITY RAIL ================= */}
+        <aside className="mb-12 lg:sticky lg:top-12 lg:col-span-4 lg:mb-0 lg:flex lg:h-[calc(100vh-6rem)] lg:flex-col lg:justify-between">
+          <div>
+            {/* Status Pill */}
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-emerald-500/25 bg-emerald-500/10 px-3 py-1 text-[11px] font-medium text-emerald-300">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+              </span>
+              Open to Full Stack & AI Roles
+            </div>
 
-      <main className="relative z-10 mx-auto max-w-6xl px-5 pb-20 pt-28 sm:pt-32">
-        {/* ============================ HERO ============================ */}
-        <section id="home" className="scroll-mt-24 pb-16">
-          <div className="grid items-center gap-8 lg:grid-cols-12">
-            {/* Left Copy */}
-            <div className="lg:col-span-8">
-              <div className="mb-5 inline-flex items-center gap-2.5 rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3.5 py-1.5 text-xs font-medium text-emerald-300">
-                <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
-                </span>
-                Available for Secondary & Higher-Secondary Science Roles
+            {/* Monogram + Name */}
+            <div className="flex items-center gap-4">
+              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-amber-400/30 bg-gradient-to-br from-amber-400/15 to-zinc-900 font-mono text-lg font-bold text-amber-300">
+                {profile.initials}
               </div>
-
-              <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-6xl lg:text-[4.25rem] lg:leading-[1.05]">
-                {personalData.name}
-              </h1>
-
-              <p className="mt-4 text-lg font-medium sm:text-2xl">
-                <span className="gradient-pan bg-gradient-to-r from-cyan-300 via-sky-300 to-indigo-400 bg-clip-text text-transparent">
-                  {personalData.title}
-                </span>
-                <span className="text-slate-500"> · </span>
-                <span className="text-slate-300">{personalData.subtitle}</span>
-              </p>
-
-              <p className="mt-5 max-w-2xl text-base leading-relaxed text-slate-400">
-                Bridging laboratory-grade{" "}
-                <span className="text-slate-200">
-                  Molecular Biology & Biochemistry
-                </span>{" "}
-                with modern classroom pedagogy—turning complex scientific
-                mechanisms into intuitive, concept-mapped learning.
-              </p>
-
-              {/* Interactive Copy Contact Pills */}
-              <div className="mt-7 flex flex-wrap gap-2.5">
-                <CopyPill
-                  label="email"
-                  value={personalData.email}
-                  icon={<Mail className="h-4 w-4" />}
-                />
-                <CopyPill
-                  label="phone number"
-                  value={personalData.mobile}
-                  icon={<Phone className="h-4 w-4" />}
-                />
-                <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-sm text-slate-300">
-                  <MapPin className="h-4 w-4 text-cyan-400" />
-                  {personalData.location}
-                </span>
-              </div>
-
-              {/* Primary CTAs */}
-              <div className="mt-8 flex flex-wrap items-center gap-3">
-                <a
-                  href="#experience"
-                  className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-slate-950 shadow-lg shadow-cyan-500/10 transition-transform hover:-translate-y-0.5"
-                >
-                  Explore Experience <ArrowUpRight className="h-4 w-4" />
-                </a>
-                <a
-                  href="#research"
-                  className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.03] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10"
-                >
-                  <FlaskConical className="h-4 w-4 text-cyan-300" /> View
-                  Research
-                </a>
+              <div>
+                <h1 className="text-2xl font-extrabold tracking-tight text-white sm:text-3xl">
+                  {profile.name}
+                </h1>
+                <p className="text-sm font-medium text-amber-400">
+                  {profile.role}
+                </p>
               </div>
             </div>
 
-            {/* Right Bio-Profile Card */}
-            <div className="lg:col-span-4">
-              <SpotlightCard className="flex flex-col items-center justify-center p-8 text-center">
-                <ProfileAvatar
-                  src={personalData.avatar}
-                  alt={personalData.name}
-                  initials={personalData.initials}
-                />
+            <p className="mt-4 font-mono text-xs leading-relaxed text-zinc-400">
+              {profile.tagline}
+            </p>
 
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-300">
-                  M.Ed. · M.Sc. (Mol. Bio)
-                </p>
-                <p className="mt-2 text-sm text-slate-400">
-                  Pedagogical Researcher & Secondary Science Specialist
-                </p>
+            {/* Quick Contact Stack */}
+            <div className="mt-6 space-y-2">
+              <CopyAction
+                label="email"
+                value={profile.email}
+                href={`mailto:${profile.email}`}
+                icon={<Mail className="h-3.5 w-3.5" />}
+              />
+              <CopyAction
+                label="phone"
+                value={profile.phone}
+                href={`tel:${profile.phone}`}
+                icon={<Phone className="h-3.5 w-3.5" />}
+              />
+              <div className="flex items-center gap-2.5 rounded-full border border-zinc-800/70 bg-zinc-900/30 px-3.5 py-2 text-xs text-zinc-400">
+                <MapPin className="h-3.5 w-3.5 shrink-0 text-amber-400" />
+                <span>{profile.shortLocation}</span>
+              </div>
+            </div>
 
-                <div className="mt-6 grid w-full grid-cols-3 divide-x divide-white/10 border-t border-white/10 pt-5">
-                  <div>
-                    <p className="text-lg font-bold text-white">80%+</p>
-                    <p className="text-[11px] text-slate-400">Pass Rate</p>
-                  </div>
-                  <div>
-                    <p className="text-lg font-bold text-white">4</p>
-                    <p className="text-[11px] text-slate-400">Degrees</p>
-                  </div>
-                  <div>
-                    <p className="text-lg font-bold text-white">3</p>
-                    <p className="text-[11px] text-slate-400">Languages</p>
-                  </div>
-                </div>
-              </SpotlightCard>
+            {/* Primary Actions */}
+            <div className="mt-6 flex flex-wrap gap-2.5">
+              <a
+                href={`mailto:${profile.email}`}
+                className="no-print inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-amber-400 px-4 py-2.5 text-xs font-bold text-zinc-950 transition-transform hover:-translate-y-0.5"
+              >
+                <Mail className="h-3.5 w-3.5" /> Hire Me
+              </a>
+              <PrintResumeButton />
             </div>
           </div>
 
-          {/* Core Skills Marquee Strip */}
-          <div className="mt-12 rounded-full border border-white/[0.07] bg-white/[0.02] p-2">
-            <Marquee items={coreSkills} />
+          {/* Desktop Scroll-Spy Nav */}
+          <div className="mt-10">
+            <RailNav />
           </div>
-        </section>
+        </aside>
 
-        {/* ======================== BENTO OVERVIEW ======================== */}
-        <section id="about" className="scroll-mt-24 py-12">
-          <SectionHeader
-            eyebrow="Profile & Capabilities"
-            title="Teaching Philosophy & Skill Matrix"
-            icon={Sparkles}
-          />
+        {/* ================= RIGHT SCROLLABLE MAIN STAGE ================= */}
+        <main className="space-y-16 lg:col-span-8">
+          {/* 01 · SUMMARY */}
+          <section id="summary" className="scroll-mt-12">
+            <DevReveal>
+              <SectionTitle
+                index="01"
+                title="Professional Summary"
+                icon={Code2}
+              />
+              <div className="rounded-3xl border border-zinc-800/90 bg-zinc-900/40 p-6 sm:p-8">
+                <p className="text-base leading-relaxed text-zinc-300 sm:text-lg">
+                  {profile.summary}
+                </p>
 
-          <div className="grid gap-5 md:grid-cols-12">
-            {/* Objective Tile */}
-            <BentoReveal className="md:col-span-7">
-              <SpotlightCard className="flex flex-col justify-between">
-                <div>
-                  <div className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-cyan-300">
-                    <Microscope className="h-4 w-4" /> Mission Statement
-                  </div>
-                  <p className="text-lg leading-relaxed text-slate-200 sm:text-xl">
-                    To secure a challenging and rewarding teaching position
-                    where I can apply deep academic training in{" "}
-                    <span className="font-semibold text-cyan-300">
-                      Science & Molecular Biology
-                    </span>{" "}
-                    alongside evidence-based pedagogy to cultivate critical
-                    thinking and scientific curiosity in students.
-                  </p>
-                </div>
-
-                <div className="mt-6 flex flex-wrap gap-2 border-t border-white/10 pt-5">
-                  {[
-                    "Concept Mapping",
-                    "Lab-First Instruction",
-                    "Smart Classrooms",
-                    "Student Mentorship",
-                  ].map((pill) => (
-                    <span
-                      key={pill}
-                      className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-xs text-slate-300"
-                    >
-                      {pill}
-                    </span>
-                  ))}
-                </div>
-              </SpotlightCard>
-            </BentoReveal>
-
-            {/* Soft Skills Tile */}
-            <BentoReveal delay={80} className="md:col-span-5">
-              <SpotlightCard>
-                <h3 className="mb-5 flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-slate-300">
-                  <Sparkles className="h-4 w-4 text-cyan-400" /> Classroom
-                  Strengths
-                </h3>
-                <div className="space-y-4">
-                  {softSkills.map((s) => (
-                    <SegMeter
-                      key={s.name}
-                      label={s.name}
-                      value={s.proficiency}
-                    />
-                  ))}
-                </div>
-              </SpotlightCard>
-            </BentoReveal>
-
-            {/* Languages Tile */}
-            <BentoReveal delay={120} className="md:col-span-5">
-              <SpotlightCard>
-                <h3 className="mb-5 flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-slate-300">
-                  <Languages className="h-4 w-4 text-indigo-400" /> Languages
-                </h3>
-                <div className="space-y-4">
-                  {languages.map((l) => (
-                    <SegMeter
-                      key={l.name}
-                      label={l.name}
-                      value={l.proficiency}
-                    />
-                  ))}
-                </div>
-              </SpotlightCard>
-            </BentoReveal>
-
-            {/* Certifications Tile */}
-            <BentoReveal delay={160} className="md:col-span-7">
-              <SpotlightCard>
-                <h3 className="mb-5 flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-slate-300">
-                  <Award className="h-4 w-4 text-cyan-400" /> Certifications &
-                  Credentials
-                </h3>
-                <div className="grid gap-3 sm:grid-cols-2">
-                  {certifications.map((cert) => (
-                    <div
-                      key={cert}
-                      className="flex items-start gap-3 rounded-2xl border border-white/[0.07] bg-white/[0.03] p-4"
-                    >
-                      <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-cyan-400" />
-                      <span className="text-sm font-medium leading-snug text-slate-200">
-                        {cert}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </SpotlightCard>
-            </BentoReveal>
-          </div>
-        </section>
-
-        {/* ========================== EXPERIENCE ========================== */}
-        <section id="experience" className="scroll-mt-24 py-12">
-          <SectionHeader
-            eyebrow="Classroom Track Record"
-            title="Professional Experience"
-            icon={Briefcase}
-          />
-
-          <div className="grid gap-5 md:grid-cols-2">
-            {experienceTimeline.map((item, i) => (
-              <BentoReveal key={item.title} delay={i * 100}>
-                <SpotlightCard className="flex flex-col justify-between">
+                {/* Metrics Strip */}
+                <div className="mt-6 grid grid-cols-3 gap-4 border-t border-zinc-800/80 pt-6">
                   <div>
-                    <div className="flex items-center justify-between gap-2">
-                      <span className="rounded-full border border-cyan-400/25 bg-cyan-400/10 px-3 py-1 text-xs font-semibold text-cyan-300">
-                        {item.period}
+                    <p className="font-mono text-2xl font-bold text-white">
+                      5+
+                    </p>
+                    <p className="mt-0.5 text-xs text-zinc-400">
+                      Years Full Stack
+                    </p>
+                  </div>
+                  <div>
+                    <p className="font-mono text-2xl font-bold text-amber-400">
+                      M.Sc. IT
+                    </p>
+                    <p className="mt-0.5 text-xs text-zinc-400">Postgraduate</p>
+                  </div>
+                  <div>
+                    <p className="font-mono text-2xl font-bold text-emerald-400">
+                      5
+                    </p>
+                    <p className="mt-0.5 text-xs text-zinc-400">
+                      Languages Spoken
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </DevReveal>
+          </section>
+
+          {/* 02 · EXPERIENCE */}
+          <section id="experience" className="scroll-mt-12">
+            <DevReveal>
+              <SectionTitle
+                index="02"
+                title="Work Experience"
+                icon={Briefcase}
+              />
+              <div className="space-y-4">
+                {experience.map((job) => (
+                  <div
+                    key={job.role}
+                    className="rounded-3xl border border-zinc-800/90 bg-zinc-900/40 p-6 transition-colors hover:border-zinc-700"
+                  >
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <span className="rounded-full border border-amber-400/25 bg-amber-400/10 px-3 py-1 font-mono text-xs font-medium text-amber-300">
+                        {job.period}
                       </span>
-                      <span className="text-xs font-medium uppercase tracking-wider text-slate-500">
-                        {item.badge}
+                      <span className="font-mono text-[11px] uppercase tracking-widest text-zinc-500">
+                        {job.type}
                       </span>
                     </div>
 
                     <h3 className="mt-4 text-xl font-bold text-white">
-                      {item.title}
+                      {job.role}
                     </h3>
-                    <p className="mt-1 text-sm font-medium text-indigo-300">
-                      {item.institution}
+                    <p className="text-sm font-medium text-zinc-400">
+                      {job.company}
                     </p>
 
-                    <ul className="mt-5 space-y-3 border-t border-white/10 pt-5">
-                      {item.details.map((d) => (
+                    <ul className="mt-5 space-y-2.5 border-t border-zinc-800/80 pt-5">
+                      {job.points.map((pt) => (
                         <li
-                          key={d}
-                          className="flex gap-3 text-sm leading-relaxed text-slate-300"
+                          key={pt}
+                          className="flex gap-3 text-sm leading-relaxed text-zinc-300"
                         >
-                          <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-cyan-400" />
-                          <span>{d}</span>
+                          <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" />
+                          <span>{pt}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
-                </SpotlightCard>
-              </BentoReveal>
-            ))}
-          </div>
-        </section>
+                ))}
+              </div>
+            </DevReveal>
+          </section>
 
-        {/* =========================== EDUCATION =========================== */}
-        <section id="education" className="scroll-mt-24 py-12">
-          <SectionHeader
-            eyebrow="Academic Foundation"
-            title="Education & Qualifications"
-            icon={GraduationCap}
-          />
+          {/* 03 · KEY PROJECTS */}
+          <section id="projects" className="scroll-mt-12">
+            <DevReveal>
+              <SectionTitle index="03" title="Key Projects" icon={Layers} />
+              <ProjectShowcase items={projects} />
+            </DevReveal>
+          </section>
 
-          <div className="grid gap-5 sm:grid-cols-2">
-            {educationTimeline.map((e, i) => (
-              <BentoReveal key={e.degree} delay={i * 80}>
-                <SpotlightCard>
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl border border-cyan-400/20 bg-cyan-400/10 text-cyan-300">
-                      <GraduationCap className="h-5 w-5" />
+          {/* 04 · TECHNICAL SKILLS */}
+          <section id="stack" className="scroll-mt-12">
+            <DevReveal>
+              <SectionTitle
+                index="04"
+                title="Technical Stack & Capabilities"
+                icon={Cpu}
+              />
+              <div className="grid gap-4 sm:grid-cols-2">
+                {skillGroups.map((group) => (
+                  <div
+                    key={group.title}
+                    className="rounded-3xl border border-zinc-800/90 bg-zinc-900/40 p-5"
+                  >
+                    <h3 className="mb-3.5 font-mono text-xs font-semibold uppercase tracking-widest text-amber-400">
+                      {group.title}
+                    </h3>
+                    <div className="flex flex-wrap gap-2">
+                      {group.items.map((item) => (
+                        <span
+                          key={item}
+                          className="rounded-full border border-zinc-800 bg-zinc-950/80 px-3 py-1.5 text-xs font-medium text-zinc-200 transition-colors hover:border-amber-400/40 hover:text-amber-200"
+                        >
+                          {item}
+                        </span>
+                      ))}
                     </div>
-                    <span className="font-mono text-2xl font-black tracking-tight text-white/15">
-                      {e.year}
-                    </span>
                   </div>
-                  <h3 className="mt-4 text-lg font-bold text-white">
-                    {e.degree}
-                  </h3>
-                  <p className="mt-1 text-xs font-medium text-cyan-300">
-                    {e.institution}
-                  </p>
-                  <p className="mt-3 text-sm leading-relaxed text-slate-400">
-                    {e.detail}
-                  </p>
-                </SpotlightCard>
-              </BentoReveal>
-            ))}
-          </div>
-        </section>
-
-        {/* ============================ RESEARCH ============================ */}
-        <section id="research" className="scroll-mt-24 py-12">
-          <SectionHeader
-            eyebrow="Scientific Inquiry"
-            title="Publication & Lab Projects"
-            icon={FlaskConical}
-          />
-
-          {/* Featured M.Ed Research Paper */}
-          <BentoReveal className="mb-5">
-            <SpotlightCard className="border-cyan-400/20 bg-gradient-to-br from-cyan-500/[0.08] via-slate-900/60 to-indigo-600/[0.1] p-8">
-              <div className="flex flex-wrap items-center justify-between gap-3">
-                <span className="inline-flex items-center gap-2 rounded-full border border-cyan-400/30 bg-cyan-400/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-cyan-300">
-                  <BookOpen className="h-3.5 w-3.5" /> Featured M.Ed. Research
-                  Paper
-                </span>
-                <span className="font-mono text-xs text-slate-400">
-                  PEDAGOGY · 2025
-                </span>
+                ))}
               </div>
-              <h3 className="mt-4 max-w-3xl text-xl font-bold leading-snug text-white sm:text-2xl">
-                Effect of Concept Mapping Strategy on Higher Order Thinking
-                Skills Among Secondary School Students.
-              </h3>
-            </SpotlightCard>
-          </BentoReveal>
+            </DevReveal>
+          </section>
 
-          {/* Lab & Review Projects */}
-          <div className="grid gap-5 md:grid-cols-2">
-            {projects.map((p, i) => (
-              <BentoReveal key={p.name} delay={i * 100}>
-                <SpotlightCard>
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-semibold uppercase tracking-widest text-indigo-300">
-                      {p.type}
-                    </span>
-                    <span className="font-mono text-xs text-slate-500">
-                      {p.code}
+          {/* 05 · EDUCATION & LANGUAGES */}
+          <section id="education" className="scroll-mt-12">
+            <DevReveal>
+              <SectionTitle
+                index="05"
+                title="Education & Languages"
+                icon={GraduationCap}
+              />
+
+              <div className="space-y-3">
+                {education.map((edu) => (
+                  <div
+                    key={edu.degree}
+                    className="flex flex-col justify-between gap-2 rounded-3xl border border-zinc-800/90 bg-zinc-900/40 p-5 sm:flex-row sm:items-center"
+                  >
+                    <div>
+                      <h3 className="text-base font-bold text-white">
+                        {edu.degree}
+                      </h3>
+                      <p className="mt-0.5 text-sm text-zinc-400">
+                        {edu.school}
+                      </p>
+                    </div>
+                    <span className="w-fit rounded-full border border-zinc-800 bg-zinc-950 px-3 py-1 font-mono text-xs text-amber-400">
+                      {edu.year}
                     </span>
                   </div>
-                  <h3 className="mt-3 text-lg font-bold text-white">
-                    {p.name}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-slate-400">
-                    {p.summary}
-                  </p>
-                  <div className="mt-5 flex flex-wrap gap-2">
-                    {p.tags.map((t) => (
-                      <span
-                        key={t}
-                        className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-xs text-slate-300"
-                      >
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                </SpotlightCard>
-              </BentoReveal>
-            ))}
-          </div>
-        </section>
-
-        {/* ============================ CONTACT ============================ */}
-        <section id="contact" className="scroll-mt-24 pt-12">
-          <BentoReveal>
-            <SpotlightCard className="overflow-hidden border-white/10 bg-gradient-to-b from-white/[0.05] to-white/[0.02] px-6 py-14 text-center sm:px-12">
-              <span className="inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/10 px-3.5 py-1 text-xs font-semibold uppercase tracking-widest text-cyan-300">
-                Get in Touch
-              </span>
-              <h2 className="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-                Ready to inspire the next generation of scientists?
-              </h2>
-              <p className="mx-auto mt-3 max-w-xl text-sm text-slate-400 sm:text-base">
-                Open to full-time secondary teaching roles, curriculum design,
-                and academic collaborations.
-              </p>
-
-              <div className="mt-8 flex flex-wrap justify-center gap-3">
-                <a
-                  href={`mailto:${personalData.email}`}
-                  className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-cyan-400 to-indigo-500 px-6 py-3 text-sm font-semibold text-slate-950 shadow-xl shadow-cyan-500/20 transition-transform hover:-translate-y-0.5"
-                >
-                  <Mail className="h-4 w-4" /> Send an Email
-                </a>
-                <a
-                  href={`tel:${personalData.mobile}`}
-                  className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10"
-                >
-                  <Phone className="h-4 w-4 text-cyan-300" />{" "}
-                  {personalData.mobile}
-                </a>
+                ))}
               </div>
 
-              <p className="mt-8 flex items-center justify-center gap-2 text-xs text-slate-500">
-                <MapPin className="h-3.5 w-3.5 text-cyan-400/70" />{" "}
-                {personalData.address}
-              </p>
-            </SpotlightCard>
-          </BentoReveal>
-        </section>
-      </main>
+              {/* Languages Bar */}
+              <div className="mt-4 flex flex-wrap items-center justify-between gap-4 rounded-3xl border border-zinc-800/90 bg-zinc-900/40 p-5">
+                <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-400">
+                  <Globe className="h-4 w-4 text-emerald-400" /> Languages
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {languages.map((lang) => (
+                    <span
+                      key={lang}
+                      className="rounded-full border border-zinc-800 bg-zinc-950 px-3.5 py-1 text-xs font-medium text-zinc-200"
+                    >
+                      {lang}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </DevReveal>
+          </section>
 
-      <footer className="relative z-10 border-t border-white/[0.06] py-6 text-center text-xs text-slate-500">
-        © {new Date().getFullYear()} {personalData.name} · Science & Technology
-        Educator
-      </footer>
+          {/* FOOTER */}
+          <footer className="border-t border-zinc-800/80 pt-6 text-xs text-zinc-500">
+            <div className="flex flex-col justify-between gap-2 sm:flex-row sm:items-center">
+              <p className="flex items-center gap-1.5">
+                <Sparkles className="h-3.5 w-3.5 text-amber-400" />
+                {profile.fullAddress}
+              </p>
+              <p>
+                © {new Date().getFullYear()} {profile.name}
+              </p>
+            </div>
+          </footer>
+        </main>
+      </div>
     </div>
   );
 }
