@@ -1,0 +1,159 @@
+/* components/bento.css */
+
+/* Microscopic lab dot-grid background */
+.bio-grid {
+  background-image: radial-gradient(
+    rgba(148, 163, 184, 0.14) 1px,
+    transparent 1px
+  );
+  background-size: 28px 28px;
+  mask-image: radial-gradient(
+    ellipse 80% 60% at 50% 20%,
+    #000 40%,
+    transparent 100%
+  );
+}
+
+/* Cursor-following spotlight on Bento cards */
+.spotlight::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    460px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(34, 211, 238, 0.12),
+    rgba(139, 92, 246, 0.06) 40%,
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+.spotlight:hover::before {
+  opacity: 1;
+}
+.spotlight::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: radial-gradient(
+    320px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(34, 211, 238, 0.65),
+    rgba(167, 139, 250, 0.35) 40%,
+    transparent 70%
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+.spotlight:hover::after {
+  opacity: 1;
+}
+
+/* Ambient aurora blobs */
+@keyframes aurora {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(5%, -5%, 0) scale(1.12);
+  }
+}
+.aurora {
+  animation: aurora 16s ease-in-out infinite;
+}
+.aurora-2 {
+  animation: aurora 22s ease-in-out infinite reverse;
+}
+
+/* Infinite skill marquee */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-track {
+  animation: marquee 30s linear infinite;
+  width: max-content;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+/* Shimmering gradient text */
+@keyframes gradient-pan {
+  to {
+    background-position: 200% center;
+  }
+}
+.gradient-pan {
+  background-size: 200% auto;
+  animation: gradient-pan 6s linear infinite;
+}
+
+/* Segmented skill meter */
+.seg {
+  transform: scaleY(0.35);
+  opacity: 0.2;
+  transition:
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.55s ease;
+}
+.seg.on {
+  transform: scaleY(1);
+  opacity: 1;
+}
+
+/* Scroll reveal */
+.bento-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.bento-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Subtle DNA node float */
+@keyframes helix-float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+.helix-float {
+  animation: helix-float 4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora,
+  .aurora-2,
+  .marquee-track,
+  .gradient-pan,
+  .helix-float {
+    animation: none !important;
+  }
+  .seg,
+  .bento-reveal {
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

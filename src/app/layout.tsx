@@ -1,16 +1,39 @@
-import './globals.css';
-import type { Metadata } from 'next';
-import { Inter } from 'next/font/google'; // Ensure Inter is imported
+// app/layout.tsx
+import "./globals.css";
+import type { Metadata, Viewport } from "next";
+import { Plus_Jakarta_Sans, Sora } from "next/font/google";
 
+// Body font: friendly, highly readable, modern
+const body = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  variable: "--font-body",
+  display: "swap",
+});
 
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
+// Display font: used for headings (h1–h3)
+const display = Sora({
+  subsets: ["latin"],
+  variable: "--font-display",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: 'My Professional Portfolio',
-  description: 'A professional portfolio showcasing my work and skills.',
+  title: {
+    default: "Arfa Sultan | Science Educator & Molecular Biologist",
+    template: "%s | Arfa Sultan",
+  },
+  description:
+    "Portfolio of Arfa Sultan, a science and technology educator with an M.Ed. and M.Sc. in Molecular Biology & Biochemistry.",
+  openGraph: {
+    title: "Arfa Sultan | Science Educator & Molecular Biologist",
+    description:
+      "Teaching experience, education, research and skills of Arfa Sultan.",
+    type: "website",
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#05060a",
 };
 
 export default function RootLayout({
@@ -19,13 +42,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.variable}`}>
-      <body className={`antialiased flex flex-col min-h-screen`}> {/* Add flex-col min-h-screen for sticky footer */}
-  
-        <main className="flex-grow"> {/* Make main content take available space */}
-          {children}
-        </main>
-      
+    <html lang="en" className={`${body.variable} ${display.variable}`}>
+      <body
+        className={`${body.className} antialiased flex min-h-screen flex-col`}
+      >
+        <main className="flex-grow">{children}</main>
       </body>
     </html>
   );
