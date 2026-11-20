@@ -17,22 +17,27 @@ const display = Sora({
 
 export const metadata: Metadata = {
   title: {
-    default: "Arfa Sultan | Science Educator & Molecular Biologist",
-    template: "%s | Arfa Sultan",
+    default: "Rizwan Ahmad Zafar | Full Stack Web Developer",
+    template: "%s | Rizwan Ahmad Zafar",
   },
   description:
-    "Portfolio of Arfa Sultan, a science and technology educator with an M.Ed. and M.Sc. in Molecular Biology & Biochemistry.",
+    "Portfolio of Rizwan Ahmad Zafar, a Full Stack Web Developer specializing in Next.js, React, TypeScript and Generative AI with LangChain.js.",
   openGraph: {
-    title: "Arfa Sultan | Science Educator & Molecular Biologist",
+    title: "Rizwan Ahmad Zafar | Full Stack Web Developer",
     description:
-      "Teaching experience, education, research and skills of Arfa Sultan.",
+      "Projects, experience and skills of Rizwan Ahmad Zafar — Next.js, React, TypeScript & Generative AI.",
     type: "website",
   },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#060913",
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#07070b",
 };
+
+// Runs before first paint so there is no dark/light flash on load.
+const themeInit = `(function(){try{var t=localStorage.getItem("theme");if(t!=="light"&&t!=="dark"){t="dark"}document.documentElement.dataset.theme=t}catch(e){document.documentElement.dataset.theme="dark"}})();`;
 
 export default function RootLayout({
   children,
@@ -43,9 +48,13 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${body.variable} ${display.variable} scroll-smooth`}
+      suppressHydrationWarning
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInit }} />
+      </head>
       <body
-        className={`${body.className} min-h-screen bg-[#060913] text-slate-200 antialiased`}
+        className={`${body.className} min-h-screen bg-[#07070b] text-zinc-200 antialiased`}
       >
         {children}
       </body>
